@@ -18,6 +18,14 @@ User
     email: 'jonny@jonny.com',
     password: 'password',
     passwordConfirmation: 'password'
+  } ,
+  {
+    firstName: 'Louise',
+    lastName: 'Hall',
+    username: 'louisehall',
+    email: 'louise@louise.com',
+    password: 'password',
+    passwordConfirmation: 'password'
   }])
 
   .then((users) => console.log(`${users.length} users created`))

@@ -13,6 +13,9 @@ router.route('/register')
 router.route('/login')
   .get(session.new)
   .post(session.create);
+
+router.route('/logout')
+  .get(session.delete);
 // RESTful routes
 // All URLS should contain the PLURAL... don't chose octopus or people or something silly.
 
@@ -30,5 +33,7 @@ router.route('/login')
 
 // DELETE
 
+
+router.all('*', (req, res) => res.notFound());
 
 module.exports = router;
