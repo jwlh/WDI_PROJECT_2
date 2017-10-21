@@ -11,6 +11,7 @@ const customResponses = require('./lib/customResponses');
 const authentication = require('./lib/authentication');
 const errorHandler = require('./lib/errorHandler');
 
+
 const app = express();
 const { port, dbUri, sessionSecret } = require('./config/environment');
 
@@ -41,5 +42,7 @@ app.use(methodOverride(function (req) {
 app.use(authentication);
 app.use(routes);
 app.use(errorHandler);
+
+
 
 app.listen(port, () => console.log(`Express is listening on port ${port}`));

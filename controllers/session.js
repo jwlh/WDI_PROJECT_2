@@ -2,7 +2,7 @@ const User = require('../models/user');
 
 
 function sessionNew(req, res) {
-  res.render('sessions/new');
+  res.render('session/new');
 }
 
 function sessionCreate(req, res) {
@@ -10,8 +10,11 @@ function sessionCreate(req, res) {
     .create({ email: req.body.email })
     .then((user) => {
       if(!user || !user.validatePassword(req.body.password)) {
-        res.status(401).render('sessions/new', { message: 'Unrecognised credentials' });
+        res.status(401).render('session/new', { message: 'Unrecognised credentials' });
       }
+
+      req.session.userId = user.id;
+
       res.redirect('/');
     });
 }
