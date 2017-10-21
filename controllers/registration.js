@@ -11,6 +11,8 @@ function registrationCreate(req,res,next) {
   User
     .create(req.body)
     .then((user) => {
+      req.flash('info', `Thanks for registering, ${user.username}!`);
+      req.session.userId =user._id;
       res.redirect('/');
     })
     .catch((err) => {

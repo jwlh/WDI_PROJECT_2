@@ -13,8 +13,8 @@ function sessionCreate(req, res) {
       if(!user || !user.validatePassword(req.body.password)) {
         res.status(401).render('session/new', { message: 'Unrecognised credentials' });
       }
-
-      req.session.userId = user.id;
+      req.flash('success', `${user.username}, you've logged in!`);
+      req.session.userId = user._id;
       req.session.isAuthenticated = true;
 
       res.redirect('/');
@@ -22,7 +22,10 @@ function sessionCreate(req, res) {
 }
 
 function sessionDelete(req,res) {
-  return req.session.regenerate(() => res.redirect('/'));
+  return req.session.regenerate(() => {
+    req.flash('success', 'You successfully logged out.');
+    res.redirect('/');
+  });
 }
 module.exports = {
   new: sessionNew,
