@@ -13,7 +13,12 @@ function registrationCreate(req,res,next) {
     .then((user) => {
       res.redirect('/');
     })
-    .catch((err) => res.status(500).end(err));
+    .catch((err) => {
+      if (err.name === 'ValidationError') {
+        return res.status(400).render('registrations/new', { message: 'Passwords do not match' });
+      }
+      res.status(500).end();
+    });
 }
 
 //export them

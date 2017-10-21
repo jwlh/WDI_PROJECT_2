@@ -9,6 +9,10 @@ router.get('/', (req, res) => res.render('homepage'));
 router.route('/register')
   .get(registration.new)
   .post(registration.create);
+
+router.route('/login')
+  .get(session.new)
+  .post(session.create);
 // RESTful routes
 // All URLS should contain the PLURAL... don't chose octopus or people or something silly.
 
