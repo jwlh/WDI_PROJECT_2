@@ -1,9 +1,10 @@
 <h1>index of restaurants</h1>
+<div class="row">
 
 <% restaurants.forEach((restaurant) => { %>
-  <div class="large-4 columns">
+  <div class="col-4">
     <a href="/restaurants/<%= restaurant.id %>">
-      <img class="thumbnail" src="<%= restaurant.image %>" alt="<%= restaurant.name %>">
+      <img class="img-fluid" src="<%= restaurant.image %>" alt="<%= restaurant.name %>">
       <h2><%= restaurant.name %></h2>
       <p>
         <%= restaurant.address.line1 %><br>
@@ -19,4 +20,7 @@
       <small>Added by: <%= restaurant.createdBy.username %></small>
     </a>
   </div>
+
 <% }) %>
+
+</div>

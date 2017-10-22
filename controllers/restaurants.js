@@ -18,9 +18,9 @@ function createRoute(req, res, next) {
 
   Restaurant
     .create(req.body)
-    .then(() => res.redirect('/restaruants'))
+    .then(() => res.redirect('/restaurants'))
     .catch((err) => {
-      if(err.name === 'ValidationError') return res.badRequest(`/restaurantss/${req.params.id}/edit`, err.toString());
+      if(err.name === 'ValidationError') return res.badRequest(`/restaurants/${req.params.id}/edit`, err.toString());
       next(err);
     });
 }
