@@ -1,1 +1,35 @@
-<h1>new restaurant</h1>
+<form method="POST" action="/restaurantss">
+  <div>
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name" required class="form-control">
+  </div>
+  <fieldset>
+    <legend>Address</legend>
+    <div class="form-group">
+      <label for="line1">Line 1</label>
+      <input type="text" name="address[line1]" id="line1" required class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="line2">Line 2</label>
+      <input type="text" name="address[line2]" id="line2" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="city">City</label>
+      <input type="text" name="address[city]" id="city" required class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="postcode">Postcode</label>
+      <input type="text" name="address[postcode]" id="postcode" required class="form-control">
+    </div>
+  </fieldset>
+  <div class="form-group">
+    <label for="stars">Rating (Out of 5)</label>
+    <input type="number" name="slices" id="slices" min="1" max="5" required class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="image">Image</label>
+    <input type="text" name="image" id="image" required class="form-control">
+  </div>
+
+  <button class="btn btn-primary">Create restaurant</button>
+</form>

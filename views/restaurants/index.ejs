@@ -1,1 +1,22 @@
 <h1>index of restaurants</h1>
+
+<% restaurants.forEach((restaurant) => { %>
+  <div class="large-4 columns">
+    <a href="/restaurants/<%= restaurant.id %>">
+      <img class="thumbnail" src="<%= restaurant.image %>" alt="<%= restaurant.name %>">
+      <h2><%= restaurant.name %></h2>
+      <p>
+        <%= restaurant.address.line1 %><br>
+        <% if(restaurant.address.line2) { %><%= restaurant.address.line2 %><br><% } %>
+        <%= restaurant.address.city %><br>
+        <%= restaurant.address.postcode %><br>
+      </p>
+
+      <p>
+        <% while(restaurant.rating--) { %> &star; <% } %>
+      </p>
+
+      <small>Added by: <%= restaurant.createdBy.username %></small>
+    </a>
+  </div>
+<% }) %>

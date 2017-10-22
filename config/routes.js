@@ -2,6 +2,8 @@ const express = require('express');
 const router  = express.Router();
 const registration = require('../controllers/registration');
 const session = require('../controllers/session');
+const restaurantsController = require('../controllers/restaurants');
+const secureRoute = require('../lib/secureRoute');
 // A home route
 router.get('/', (req, res) => res.render('homepage'));
 
@@ -16,22 +18,27 @@ router.route('/login')
 
 router.route('/logout')
   .get(session.delete);
-// RESTful routes
-// All URLS should contain the PLURAL... don't chose octopus or people or something silly.
 
-// INDEX
 
-// NEW
+router.route('/restaurants')
+  .get(restaurantsController.index)
+  .post(secureRoute, restaurantsController.create);
 
-// SHOW
+router.route('/restaurants/new')
+  .get(secureRoute, restaurantsController.new);
 
-// CREATE
+router.route('/restaurants/:id')
+  .get(restaurantsController.show)
+  .put(secureRoute, restaurantsController.update)
+  .delete(secureRoute, restaurantsController.delete);
 
-// EDIT
+router.route('/restaurants/:id/edit')
+  .get(secureRoute, restaurantsController.edit);
 
-// UPDATE
+router.route('/restaurants/:id/comments')
+  .post(secureRoute, restaurantsController.createComment)
+  .delete(secureRoute, restaurantsController.deleteComment);
 
-// DELETE
 
 
 router.all('*', (req, res) => res.notFound());

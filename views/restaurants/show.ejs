@@ -1,1 +1,45 @@
 <h1>show individual restaurant</h1>
+
+<div class="large-12 columns">
+  <img src="<%= restaurant.image %>" alt="<%= restaurant.name %>">
+  <h2><%= restaurant.name %></h2>
+  <% if(locals.isAuthenticated && restaurant.belongsTo(user)) { %>
+    <a href="/restaurants/<%= restaurant.id %>/edit" class="button">Edit</a>
+
+    <form method="POST" action="/restaurants/<%= restaurant.id %>">
+      <input type="hidden" name="_method" value="DELETE">
+      <button class="button alert">Delete</button>
+    </form>
+  <% } %>
+
+  <p>
+    <%= restaurant.address.line1 %><br>
+    <% if(restaurant.address.line2) { %><%= restaurant.address.line2 %><br><% } %>
+    <%= restaurant.address.city %><br>
+    <%= restaurant.address.postcode %><br>
+  </p>
+
+  <p>
+    <% while(restaurant.rating--) { %> &star; <% } %>
+  </p>
+
+  <small>Added by: <%= restaurant.createdBy.username %></small>
+
+  <section>
+    <h4>Comments</h4>
+    <% restaurant.comments.forEach((comment) => { %>
+      <p><%= comment.content %></p>
+      <small><%= comment.createdBy.username %></small>
+    <% }) %>
+  </section>
+
+  <% if(locals.isAuthenticated) { %>
+    <section>
+      <h4>Leave a comment</h4>
+      <form method="POST" action="/restaurants/<%= restaurant.id %>/comments">
+        <textarea name="content" id="content" placeholder="Comment" required maxlength="255"></textarea>
+        <button class="button">Leave a comment</button>
+      </form>
+    </section>
+  <% } %>
+</div>
