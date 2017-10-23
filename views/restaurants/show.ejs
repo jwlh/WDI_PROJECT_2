@@ -2,10 +2,11 @@
 <div class="container">
 
 
-<div class="col-12">
+<div class="col-8">
   <h2><%= restaurant.name %></h2>
-  <img class = "img-fluid restaurant-img-show"src="<%= restaurant.image %>" alt="<%= restaurant.name %>"> <br>
-
+  <div class="img-container-show">
+    <img class = "img-fluid restaurant-img-show"src="<%= restaurant.image %>" alt="<%= restaurant.name %>"> <br>
+  </div>
   <div class="restaurant-address">
 
 
@@ -57,10 +58,10 @@
 
   <% if(locals.isAuthenticated) { %>
     <section>
-      <h5>Leave a comment</h5>
+      <h6>Leave a comment:</h6>
       <form method="POST" action="/restaurants/<%= restaurant.id %>/comments">
         <textarea class="form-control" name="content" id="content" placeholder="Comment"></textarea><br>
-        <button class="btn btn-secondary">Leave a comment</button>
+        <button class="btn btn-outline-success">Post your comment</button>
       </form>
     </section>
   <% } %>

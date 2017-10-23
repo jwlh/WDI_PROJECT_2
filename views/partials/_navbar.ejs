@@ -1,4 +1,4 @@
-<nav class="navbar transparent navbar-expand-lg navbar-light bg-light">
+<nav class="navbar transparent navbar-expand-md navbar-light bg-light">
   <a class="navbar-brand" href="/">
    <img src="/images/pizza-icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
    E.B.P.
@@ -8,18 +8,26 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
+      <a class="nav-link" href="/restaurants">View Pizza Joints</a>
+      <% if(locals.isAuthenticated) { %>
+        <a class="nav-link" href="/restaurants/new">Add New Pizza Joint</a>
+      <% } else { %>
 
+      <% } %>
+
+  </ul>
+  <ul class="navbar-nav ml-auto">
       <% if(!locals.isAuthenticated) { %>
         <a class="nav-link" href="/register">Register</a>
         <a class="nav-link" href="/login">Log In</a>
       <% } else { %>
+
         <a class="nav-link" href="/profile">Your Profile</a>
         <a class="nav-link" href="/logout">Log Out</a>
       <% } %>
-        <a class="nav-link" href="/restaurants">View Pizza Joints</a>
-        <a class="nav-link" href="/restaurants/new">Add New Pizza Joint</a>
 
-      </li>
+
+
     </ul>
   </div>
 </nav>

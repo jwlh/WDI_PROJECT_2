@@ -1,16 +1,18 @@
 <div class="container">
-<h1>Username: <%= user.username %></h1>
 
-<h4>First Name: <%= user.firstName %></h4>
-<h4>Last Name: <%= user.lastName %></h4>
+<h3>Your Profile Details</h3>
 
-<p>Email: <%= user.email %></p>
+<h5>Username: <%= user.username %></h5>
 
-<a class="btn btn-secondary" href="/profile/edit">Edit</a><br>
+<h5>First Name: <%= user.firstName %></h4>
+<h5>Last Name: <%= user.lastName %></h4>
 
+<h5>Email: <%= user.email %></h5>
+
+<a class="btn btn-outline-secondary" href="/profile/edit">Edit</a>
 
 <form method="POST" action="/profile">
   <input type="hidden" name="_method" value="DELETE">
-  <button class="btn btn-danger">Delete</button>
+  <button class="btn btn-outline-danger">Delete</button>
 </form>
 </div>

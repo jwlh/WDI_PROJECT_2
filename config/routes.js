@@ -3,7 +3,7 @@ const router  = express.Router();
 const registrations = require('../controllers/registration');
 const session = require('../controllers/session');
 const restaurants = require('../controllers/restaurants');
-
+const secureRoute = require('../lib/secureRoutes');
 // A home route
 router.get('/', (req, res) => res.render('homepage'));
 
@@ -30,24 +30,25 @@ router.route('/logout')
 
 router.route('/restaurants')
   .get(restaurants.index)
-  .post(restaurants.create);
+  .post(secureRoute, restaurants.create);
 
 router.route('/restaurants/new')
-  .get(restaurants.new);
+  .get(secureRoute, restaurants.new);
 
 router.route('/restaurants/:id')
   .get(restaurants.show)
-  .put(restaurants.update)
-  .delete(restaurants.delete);
+  .put(secureRoute, restaurants.update)
+  .delete(secureRoute, restaurants.delete);
 
 router.route('/restaurants/:id/edit')
-  .get(restaurants.edit);
+  .get(secureRoute, restaurants.edit);
 
 router.route('/restaurants/:id/comments')
-  .post(restaurants.createComment);
+  .post(secureRoute, restaurants.createComment)
+  .delete(secureRoute, restaurants.deleteComment);
 
-router.route('/hotels/:id/comments/:commentId')
-  .delete(restaurants.deleteComment);
+// router.route('/hotels/:id/comments/:commentId')
+//   .delete(restaurants.deleteComment);
 
 
 

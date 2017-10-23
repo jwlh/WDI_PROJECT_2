@@ -17,9 +17,18 @@
 }
 
 .restaurant-img-show {
-  min-width: 80%;
+  position: absolute;
+   top: 0;
+   left: 0;
+  width: 100%;
 }
 
 .restaurant-address {
   margin-top: 10px;
+}
+
+.img-container-show {
+    position:relative;
+    padding-top:66.59%;
+     overflow: hidden;
 }
