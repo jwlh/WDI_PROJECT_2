@@ -6,6 +6,7 @@
     <a href="/restaurants/<%= restaurant.id %>">
       <img class="img-fluid" src="<%= restaurant.image %>" alt="<%= restaurant.name %>">
       <h2><%= restaurant.name %></h2>
+      </a>
       <p>
         <%= restaurant.address.line1 %><br>
         <% if(restaurant.address.line2) { %><%= restaurant.address.line2 %><br><% } %>
@@ -13,12 +14,16 @@
         <%= restaurant.address.postcode %><br>
       </p>
 
-      <p>
-        <% while(restaurant.rating--) { %> &star; <% } %>
-      </p>
+      <ul class="pizza-icon-ul">
+        <% while(restaurant.rating--) { %>
+          <li class="pizza-icon-li">
+            <img class= "pizza-icon-img-index" src='/images/pizza-icon.png'>
+          </li>
+        <% } %>
+      </ul>
 
       <small>Added by: <%= restaurant.createdBy.username %></small>
-    </a>
+
   </div>
 
 <% }) %>

@@ -4,15 +4,6 @@
   <h2><%= restaurant.name %></h2>
   <img class = "img-fluid"src="<%= restaurant.image %>" alt="<%= restaurant.name %>">
 
-  <% if(locals.isAuthenticated && restaurant.belongsTo(user)) { %>
-    <a href="/restaurants/<%= restaurant.id %>/edit" class="button">Edit</a>
-
-    <form method="POST" action="/restaurants/<%= restaurant.id %>">
-      <input type="hidden" name="_method" value="DELETE">
-      <button class="button alert">Delete</button>
-    </form>
-  <% } %>
-
   <p>
     <%= restaurant.address.line1 %><br>
     <% if(restaurant.address.line2) { %><%= restaurant.address.line2 %><br><% } %>
@@ -20,17 +11,38 @@
     <%= restaurant.address.postcode %><br>
   </p>
 
-  <p>
-    <% while(restaurant.rating--) { %> &star; <% } %>
-  </p>
+  <ul class="pizza-icon-ul">
+    <% while(restaurant.rating--) { %>
+      <li class="pizza-icon-li">
+        <img class= "pizza-icon-img" src='/images/pizza-icon.png'>
+      </li>
+    <% } %>
+  </ul>
 
-  <small>Added by: <%= restaurant.createdBy.username %></small>
+  <small>Added by: <%= restaurant.createdBy.username %></small> <br>
+
+  <% if(locals.isAuthenticated && restaurant.belongsTo(user)) { %>
+    <a class = "btn btn-primary"href="/restaurants/<%= restaurant.id %>/edit" class="button">Edit</a>
+
+    <form method="POST" action="/restaurants/<%= restaurant.id %>">
+      <input type="hidden" name="_method" value="DELETE">
+      <button class = "btn btn-primary">Delete</button>
+    </form>
+  <% } %>
 
   <section>
     <h4>Comments</h4>
     <% restaurant.comments.forEach((comment) => { %>
       <p><%= comment.content %></p>
       <small><%= comment.createdBy.username %></small>
+
+      <% if(locals.isAuthenticated && comment.belongsTo(user)) { %>
+
+        <form method="POST" action="/restaurants/<%= restaurant.id %>/comments/<%= comment.id %>">
+          <input type="hidden" name="_method" value="DELETE">
+          <button>Delete</button>
+        </form>
+      <% } %>
     <% }) %>
   </section>
 

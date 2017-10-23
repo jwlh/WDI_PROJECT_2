@@ -3,7 +3,7 @@ const User = require('../models/user');
 
 //write a function that renders the registration form
 function registrationNew(req,res) {
-  res.render('registration/new');
+  res.render('registrations/new');
 }
 
 //write a function that creates the new user
@@ -23,8 +23,41 @@ function registrationCreate(req,res,next) {
     });
 }
 
+function registrationShow(req, res) {
+  return res.render('registrations/show');
+}
+
+function registrationEdit(req, res) {
+  return res.render('registrations/edit');
+}
+
+function registrationUpdate(req, res, next) {
+  for(const field in req.body) {
+    req.user[field] = req.body[field];
+  }
+
+  req.user.save()
+    .then(() => res.redirect('/profile'))
+    .catch((err) => {
+      if(err.name === 'ValidationError') return res.badRequest('/registrations/edit', err.toString());
+      next(err);
+    });
+}
+
+function registrationDelete(req, res, next) {
+  return req.user.remove()
+    .then(() => {
+      req.session.regenerate(() => res.redirect('/'));
+    })
+    .catch(next);
+}
+
 //export them
 module.exports = {
   new: registrationNew,
-  create: registrationCreate
+  create: registrationCreate,
+  show: registrationShow,
+  edit: registrationEdit,
+  update: registrationUpdate,
+  delete: registrationDelete
 };

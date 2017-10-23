@@ -30,7 +30,7 @@ function showRoute(req, res, next) {
     .findById(req.params.id)
     .populate('createdBy comments.createdBy')
     .exec()
-    .then(restaurant => {
+    .then((restaurant) => {
       if(!restaurant) return res.notFound();
       return res.render('restaurants/show', { restaurant });
     })
@@ -41,7 +41,7 @@ function editRoute(req, res, next) {
   Restaurant
     .findById(req.params.id)
     .exec()
-    .then(restaurant => {
+    .then((restaurant) => {
       if(!restaurant) return res.redirect();
       if(!restaurant.belongsTo(req.user)) return res.unauthorized('You do not have permission to edit that resource');
       return res.render('restaurants/edit', { restaurant });
@@ -49,11 +49,14 @@ function editRoute(req, res, next) {
     .catch(next);
 }
 
+
 function updateRoute(req, res, next) {
   Restaurant
     .findById(req.params.id)
     .exec()
     .then(restaurant => {
+      console.log('req params', req.params.id);
+      console.log('This is the restaurant:', restaurant);
       if(!restaurant) return res.notFound();
       if(!restaurant.belongsTo(req.user)) return res.unauthorized('You do not have permission to edit that resource');
 
@@ -74,7 +77,7 @@ function deleteRoute(req, res, next) {
   Restaurant
     .findById(req.params.id)
     .exec()
-    .then(restaurant => {
+    .then((restaurant) => {
       if(!restaurant) return res.notFound();
       if(!restaurant.belongsTo(req.user)) return res.unauthorized('You do not have permission to delete that resource');
       return restaurant.remove();
@@ -87,7 +90,7 @@ function createCommentRoute(req, res, next) {
   Restaurant
     .findById(req.params.id)
     .exec()
-    .then(restaurant => {
+    .then((restaurant) => {
       if (!restaurant) return res.notFound();
 
       req.body.createdBy = req.user;
@@ -106,10 +109,14 @@ function deleteCommentRoute(req, res, next) {
   Restaurant
     .findById(req.params.id)
     .exec()
-    .then(restaurant => {
+    .then((restaurant) => {
       if (!restaurant) return res.notFound();
       if (!restaurant.belongsTo(req.user)) return res.unauthorized('You do not have permission to delete that resource');
-      restaurant.comments.id(req.params.commentId).remove();
+      console.log('req params is', req.params);
+      console.log('req params.comment', req.params.comment);
+      console.log('req oarams.commentId', req.params.commentId);
+      console.log('req params.comment._id', req.params.comment._id);
+      restaurant.comments.id(req.params.comment._id).remove();
 
       return restaurant.save();
     })

@@ -1,16 +1,24 @@
 const express = require('express');
 const router  = express.Router();
-const registration = require('../controllers/registration');
+const registrations = require('../controllers/registration');
 const session = require('../controllers/session');
-const restaurantsController = require('../controllers/restaurants');
+const restaurants = require('../controllers/restaurants');
 
 // A home route
 router.get('/', (req, res) => res.render('homepage'));
 
 
 router.route('/register')
-  .get(registration.new)
-  .post(registration.create);
+  .get(registrations.new)
+  .post(registrations.create);
+
+router.route('/profile')
+  .get(registrations.show)
+  .put(registrations.update)
+  .delete(registrations.delete);
+
+router.route('/profile/edit')
+  .get(registrations.edit);
 
 router.route('/login')
   .get(session.new)
@@ -21,23 +29,25 @@ router.route('/logout')
 
 
 router.route('/restaurants')
-  .get(restaurantsController.index)
-  .post(restaurantsController.create);
+  .get(restaurants.index)
+  .post(restaurants.create);
 
 router.route('/restaurants/new')
-  .get(restaurantsController.new);
+  .get(restaurants.new);
 
 router.route('/restaurants/:id')
-  .get(restaurantsController.show)
-  .put(restaurantsController.update)
-  .delete(restaurantsController.delete);
+  .get(restaurants.show)
+  .put(restaurants.update)
+  .delete(restaurants.delete);
 
 router.route('/restaurants/:id/edit')
-  .get(restaurantsController.edit);
+  .get(restaurants.edit);
 
 router.route('/restaurants/:id/comments')
-  .post(restaurantsController.createComment)
-  .delete(restaurantsController.deleteComment);
+  .post(restaurants.createComment);
+
+router.route('/hotels/:id/comments/:commentId')
+  .delete(restaurants.deleteComment);
 
 
 

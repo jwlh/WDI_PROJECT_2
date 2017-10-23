@@ -1,3 +1,21 @@
 body {
   font-family: 'Roboto', sans-serif;
+
+}
+
+.pizza-icon-ul {
+  -webkit-padding-start: 0;
+}
+.pizza-icon-li {
+  list-style: none;
+  display: inline;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.pizza-icon-img {
+  max-width: 50px;
+}
+.pizza-icon-img-index {
+  max-width: 25px;
 }
