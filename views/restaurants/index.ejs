@@ -1,11 +1,16 @@
-<h1>index of restaurants</h1>
+<div class="container">
+
+
+<h1>Pizza Joints</h1>
 <div class="row">
 
 <% restaurants.forEach((restaurant) => { %>
-  <div class="col-4">
+  <div class="col-lg-4 col-md-6 col-sm-9 restaurant-index">
     <a href="/restaurants/<%= restaurant.id %>">
+      <div class="img-container-index">
       <img class="img-fluid restaurant-img-index" src="<%= restaurant.image %>" alt="<%= restaurant.name %>">
-      <h2><%= restaurant.name %></h2>
+      </div>
+      <h4><%= restaurant.name %></h4>
       </a>
       <p>
         <%= restaurant.address.line1 %><br>
@@ -28,4 +33,5 @@
 
 <% }) %>
 
+</div>
 </div>

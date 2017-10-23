@@ -1,26 +1,24 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
+<nav class="navbar transparent navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">
+   <img src="/images/pizza-icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+   E.B.P.
+ </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
+
       <% if(!locals.isAuthenticated) { %>
         <a class="nav-link" href="/register">Register</a>
         <a class="nav-link" href="/login">Log In</a>
       <% } else { %>
-        <a class="nav-link" href="/profile"><%= user.username %></a>
+        <a class="nav-link" href="/profile">Your Profile</a>
         <a class="nav-link" href="/logout">Log Out</a>
       <% } %>
-    
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Restaurants
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="nav-link" href="/restaurants">View Restaurants</a>
-          <a class="nav-link" href="/restaurants/new">Add New Restaurants</a>
-        </div>
+        <a class="nav-link" href="/restaurants">View Pizza Joints</a>
+        <a class="nav-link" href="/restaurants/new">Add New Pizza Joint</a>
+
       </li>
     </ul>
   </div>

@@ -1,26 +1,15 @@
+@import 'indexofrestaurants';
+@import 'showrestaurants';
+
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Monsterrat', sans-serif;
 
 }
 
-.pizza-icon-ul {
-  -webkit-padding-start: 0;
-}
-.pizza-icon-li {
-  list-style: none;
-  display: inline;
-  padding-left: 5px;
-  padding-right: 5px;
+h1,h2,h3,h4 {
+  font-family: 'Inconsolata', monospace;
 }
 
-.pizza-icon-img {
-  max-width: 50px;
-}
-.pizza-icon-img-index {
-  max-width: 25px;
-}
-
-.restaurant-img-index {
-  width: 350px;
-  height:250px;
+.btn {
+  margin-bottom: 5px;
 }
