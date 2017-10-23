@@ -112,10 +112,6 @@ function deleteCommentRoute(req, res, next) {
     .then((restaurant) => {
       if (!restaurant) return res.notFound();
       if (!restaurant.belongsTo(req.user)) return res.unauthorized('You do not have permission to delete that resource');
-      console.log('req params is', req.params);
-      console.log('req params.comment', req.params.comment);
-      console.log('req oarams.commentId', req.params.commentId);
-      console.log('req params.comment._id', req.params.comment._id);
       restaurant.comments.id(req.params.comment._id).remove();
 
       return restaurant.save();
