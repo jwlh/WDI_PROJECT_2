@@ -140,8 +140,20 @@ User
         rating: 4,
         review: 'Your difficult friend Becks is visiting from Earlsfield, but you want to be sure to get a good meal while avoiding an evening of bitching and moaning about ‘challenging’ ethnic food and small portions. Take them to Homeslice, a Valhalla for anyone who loves pizza, and let the sweet taste of red sauce and mozzarella wash over you like that one time you went to The Berkeley and got a neck massage. The pizzas are pricey but they’re huge, and you can get them by the slice if you’re indecisive or not super hungry. The drinks list is short but as it includes prosecco on tapyou don\'t need any other options anyway.',
         createdBy: users[2]
-      }]);
+      }])
+      .then((restaurants) => {
+        console.log(`${restaurants.length} restaurants were created!`);
+        for (var i = 0; i < restaurants.length; i++) {
+          const createdId = restaurants[i].createdBy.id;
+          for (var j = 0; j < users.length; j++) {
+            if (users[j].id === createdId) {
+              users[j].restaurantsCreated.push(restaurants[i].id);
+              users[j].save();
+            }
+          }
+        }
+        console.log(users);
+      });
   })
-  .then((restaurants) => console.log(`${restaurants.length} restaurants created`))
   .catch((err) => console.log(err))
   .finally(() => mongoose.connection.close());

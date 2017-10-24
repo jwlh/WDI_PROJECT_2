@@ -12,13 +12,6 @@
       </div>
       <h4><%= restaurant.name %></h4>
       </a>
-      <p>
-        <%= restaurant.address.line1 %><br>
-        <% if(restaurant.address.line2) { %><%= restaurant.address.line2 %><br><% } %>
-        <%= restaurant.address.city %><br>
-        <%= restaurant.address.postcode %><br>
-      </p>
-
       <ul class="pizza-icon-ul">
         <% while(restaurant.rating--) { %>
           <li class="pizza-icon-li">
@@ -26,8 +19,15 @@
           </li>
         <% } %>
       </ul>
+      <p>
+        <%= restaurant.address.line1 %><br>
+        <% if(restaurant.address.line2) { %><%= restaurant.address.line2 %><br><% } %>
+        <%= restaurant.address.city %><br>
+        <%= restaurant.address.postcode %><br>
+        <small class="created-by">Added by: <%= restaurant.createdBy.username %></small>
+      </p>
 
-      <small>Added by: <%= restaurant.createdBy.username %></small>
+
 
   </div>
 

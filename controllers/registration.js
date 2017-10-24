@@ -24,9 +24,21 @@ function registrationCreate(req,res) {
     });
 }
 
-function registrationShow(req, res, Restaurant) {
-  console.log(Restaurant);
-  return res.render('registrations/show');
+function registrationShow(req, res, next) {
+  User
+    .findById(req.params.id)
+    .populate('restaurantsCreated')
+    .exec()
+    .then((user) => {
+      Restaurant
+        .find()
+        .exec()
+        .then(restaurants => {
+          res.render('registrations/show', { user, restaurants });
+        });
+    })
+    .catch(next);
+
 }
 
 function registrationEdit(req, res) {

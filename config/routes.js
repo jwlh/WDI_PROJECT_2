@@ -12,7 +12,7 @@ router.route('/register')
   .get(registrations.new)
   .post(registrations.create);
 
-router.route('/profile')
+router.route('/profile/:id')
   .get(registrations.show)
   .put(registrations.update)
   .delete(registrations.delete);
@@ -26,7 +26,6 @@ router.route('/login')
 
 router.route('/logout')
   .get(session.delete);
-
 
 router.route('/restaurants')
   .get(restaurants.index)
@@ -46,10 +45,8 @@ router.route('/restaurants/:id/edit')
 router.route('/restaurants/:id/comments')
   .post(secureRoute, restaurants.createComment);
 
-
-router.route('/hotels/:id/comments/:commentId')
+router.route('/restaurants/:id/comments/:commentId')
   .delete(secureRoute, restaurants.deleteComment);
-
 
 
 router.all('*', (req, res) => res.notFound());

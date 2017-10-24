@@ -1,11 +1,14 @@
 const Restaurant = require('../models/restaurant');
+const User = require('../models/user');
 
 function indexRoute(req, res, next) {
   Restaurant
     .find()
     .populate('createdBy')
     .exec()
-    .then((restaurants) => res.render('restaurants/index', { restaurants }))
+    .then((restaurants) => {
+      res.render('restaurants/index', { restaurants });
+    })
     .catch(next);
 }
 
@@ -18,7 +21,16 @@ function createRoute(req, res, next) {
 
   Restaurant
     .create(req.body)
-    .then(() => res.redirect('/restaurants'))
+    .then(restaurant => {
+      User
+        .findById(req.session.userId)
+        .exec()
+        .then(user => {
+          user.restaurantsCreated.push(restaurant._id);
+          user.save();
+        })
+        .then(() => res.redirect('/restaurants'));
+    })
     .catch((err) => {
       if(err.name === 'ValidationError') return res.badRequest(`/restaurants/${req.params.id}/edit`, err.toString());
       next(err);
