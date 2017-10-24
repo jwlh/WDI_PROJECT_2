@@ -32,25 +32,30 @@
   </p>
 
   <% if(locals.isAuthenticated && restaurant.belongsTo(user)) { %>
-    <a class = "btn btn-secondary"href="/restaurants/<%= restaurant.id %>/edit" class="button">Edit</a>
-
+    <div class="row">
+    <div class="col-md-1 col-sm-3 btn-pad-right">
+    <a class = "btn btn-outline-secondary btn-pad-right"href="/restaurants/<%= restaurant.id %>/edit" class="button">Edit</a>
+    </div>
+    <div class="col-md-1 col-sm-3 btn-pad-right">
     <form method="POST" action="/restaurants/<%= restaurant.id %>">
       <input type="hidden" name="_method" value="DELETE">
-      <button class = "btn btn-danger">Delete</button>
+      <button class = "btn btn-outline-danger">Delete</button>
     </form>
+    </div>
+    </div>
   <% } %>
 
-  <section>
-    <h5>Comments</h5>
+  <section class="comments">
+    <h5>Comments:</h5>
     <% restaurant.comments.forEach((comment) => { %>
       <p><%= comment.content %> <br>
       <small>left by: <%= comment.createdBy.username %></small>
       </p>
       <% if(locals.isAuthenticated && comment.belongsTo(user)) { %>
 
-        <form method="POST" action="/restaurants/<%= restaurant.id %>/comments/<%= comment.id %>">
+        <form class= "comment-delete" method="POST" action="/restaurants/<%= restaurant.id %>/comments/<%= comment.id %>">
           <input type="hidden" name="_method" value="DELETE">
-          <button class= "btn btn-danger">Delete</button>
+          <button class= "btn-sm btn-outline-danger">Delete</button>
         </form>
       <% } %>
     <% }) %>

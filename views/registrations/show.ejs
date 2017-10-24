@@ -16,3 +16,39 @@
   <button class="btn btn-outline-danger">Delete</button>
 </form>
 </div>
+
+
+
+<div class="row">
+<% restaurants.forEach((restaurant) => { %>
+  <% if(restaurant.belongsTo(user._id)) { %>
+    <div class="col-lg-4 col-md-6 col-sm-9 restaurant-index">
+      <a href="/restaurants/<%= restaurant.id %>">
+        <div class="img-container-index">
+        <img class="img-fluid restaurant-img-index" src="<%= restaurant.image %>" alt="<%= restaurant.name %>">
+        </div>
+        <h4><%= restaurant.name %></h4>
+        </a>
+        <p>
+          <%= restaurant.address.line1 %><br>
+          <% if(restaurant.address.line2) { %><%= restaurant.address.line2 %><br><% } %>
+          <%= restaurant.address.city %><br>
+          <%= restaurant.address.postcode %><br>
+        </p>
+
+        <ul class="pizza-icon-ul">
+          <% while(restaurant.rating--) { %>
+            <li class="pizza-icon-li">
+              <img class= "pizza-icon-img-index" src='/images/pizza-icon.png'>
+            </li>
+          <% } %>
+        </ul>
+
+        <small>Added by: <%= restaurant.createdBy.username %></small>
+
+    </div>
+<% } %>
+
+<% }) %>
+
+</div>

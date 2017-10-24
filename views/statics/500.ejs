@@ -1,17 +1,26 @@
 <div class="container">
 
+<div class="row">
 
-<h1>Sorry we got distracted thinking about pizza and something went wrong, please try again</h1>
+<div class="center">
+
+
+  <iframe src="https://giphy.com/embed/1108D2tVaUN3eo" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
 
 
-<div style="width:100%;height:0;padding-bottom:75%;position:relative;"><iframe src="https://giphy.com/embed/1108D2tVaUN3eo" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/life-pizza-lover-1108D2tVaUN3eo">via GIPHY</a></p>
+<h4>Sorry we got distracted thinking about pizza and something went wrong, please try again</h3>
 
-<h2><%= err.message %></h2>
+<%# <iframe src="https://giphy.com/gifs/life-pizza-lover-1108D2tVaUN3eo" width="480" height="320" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>%>
+</div>
+
+  <h6><%= err.message %></h6>
 
 <% if(locals.err.stack) { %>
 <pre>
   <%= err.stack %>
 </pre>
 <% } %>
+
+</div>
 </div>

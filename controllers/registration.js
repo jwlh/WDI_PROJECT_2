@@ -1,5 +1,6 @@
 //require user database
 const User = require('../models/user');
+const Restaurant = require('../models/restaurant');
 
 //write a function that renders the registration form
 function registrationNew(req,res) {
@@ -7,13 +8,13 @@ function registrationNew(req,res) {
 }
 
 //write a function that creates the new user
-function registrationCreate(req,res,next) {
+function registrationCreate(req,res) {
   User
     .create(req.body)
     .then((user) => {
-      req.flash('info', `Thanks for registering, ${user.username}!`);
+      req.flash('success', `Thanks for registering, ${user.username}!`);
       req.session.userId =user._id;
-      res.redirect('/');
+      res.redirect('/restaurants/index');
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -23,7 +24,8 @@ function registrationCreate(req,res,next) {
     });
 }
 
-function registrationShow(req, res) {
+function registrationShow(req, res, Restaurant) {
+  console.log(Restaurant);
   return res.render('registrations/show');
 }
 

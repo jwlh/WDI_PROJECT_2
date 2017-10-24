@@ -105,6 +105,20 @@ function createCommentRoute(req, res, next) {
     });
 }
 
+// function deleteCommentRoute(req, res, next) {
+//   Restaurant
+//     .findById(req.params.id)
+//     .exec()
+//     .then((restaurant) => {
+//       if (!restaurant) return res.notFound();
+//       if (!restaurant.belongsTo(req.user)) return res.unauthorized('You do not have permission to delete that resource');
+//       restaurant.comments.id(req.params.comment._id).remove();
+//
+//       return restaurant.save();
+//     })
+//     .then(restaurant => res.redirect(`/restaurants/${restaurant.id}`))
+//     .catch(next);
+// }
 function deleteCommentRoute(req, res, next) {
   Restaurant
     .findById(req.params.id)
@@ -112,7 +126,9 @@ function deleteCommentRoute(req, res, next) {
     .then((restaurant) => {
       if (!restaurant) return res.notFound();
       if (!restaurant.belongsTo(req.user)) return res.unauthorized('You do not have permission to delete that resource');
-      restaurant.comments.id(req.params.comment._id).remove();
+
+      const comment = restaurant.comments.id(req.params.commentId);
+      comment.remove();
 
       return restaurant.save();
     })

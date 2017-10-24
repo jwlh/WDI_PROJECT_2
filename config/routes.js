@@ -44,11 +44,11 @@ router.route('/restaurants/:id/edit')
   .get(secureRoute, restaurants.edit);
 
 router.route('/restaurants/:id/comments')
-  .post(secureRoute, restaurants.createComment)
-  .delete(secureRoute, restaurants.deleteComment);
+  .post(secureRoute, restaurants.createComment);
 
-// router.route('/hotels/:id/comments/:commentId')
-//   .delete(restaurants.deleteComment);
+
+router.route('/hotels/:id/comments/:commentId')
+  .delete(secureRoute, restaurants.deleteComment);
 
 
 
