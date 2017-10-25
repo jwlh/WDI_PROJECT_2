@@ -6,12 +6,21 @@
 
 <% restaurants.forEach((restaurant) => { %>
   <div class="col-lg-4 col-md-6 col-sm-9 restaurant-index">
+  <% if(locals.isAuthenticated) { %>
     <a href="/restaurants/<%= restaurant.id %>">
       <div class="img-container-index">
-      <img class="img-fluid restaurant-img-index" src="<%= restaurant.image %>" alt="<%= restaurant.name %>">
+        <img class="img-fluid restaurant-img-index" src="<%= restaurant.image %>" alt="<%= restaurant.name %>">
       </div>
       <h4><%= restaurant.name %></h4>
       </a>
+  <% } else { %>
+      <div class="img-container-index">
+        <img class="img-fluid restaurant-img-index" src="<%= restaurant.image %>" alt="<%= restaurant.name %>">
+      </div>
+      <h4><%= restaurant.name %></h4>
+      <h6> You have to be <a href="/login">logged in</a> to view reviews etc.</h6>
+  <% } %>
+
       <ul class="pizza-icon-ul">
         <% while(restaurant.rating--) { %>
           <li class="pizza-icon-li">
@@ -24,7 +33,12 @@
         <% if(restaurant.address.line2) { %><%= restaurant.address.line2 %><br><% } %>
         <%= restaurant.address.city %><br>
         <%= restaurant.address.postcode %><br>
-        <small class="created-by">Added by: <%= restaurant.createdBy.username %></small>
+        <% if(locals.isAuthenticated) { %>
+          <small class="created-by">Added by:<a href="/profile/<%= restaurant.createdBy.id %>"> <%= restaurant.createdBy.username %></a></small>
+        <% } else { %>
+          <small class="created-by">Added by: <%= restaurant.createdBy.username %></small>
+        <% } %>
+
       </p>
 
 

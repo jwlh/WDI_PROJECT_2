@@ -17,20 +17,11 @@ function newRoute(req, res) {
 }
 
 function createRoute(req, res, next) {
-  req.body.createdBy = req.user;
+  req.body.createdBy = req.loggedInUser;
 
   Restaurant
     .create(req.body)
-    .then(restaurant => {
-      User
-        .findById(req.session.userId)
-        .exec()
-        .then(user => {
-          user.restaurantsCreated.push(restaurant._id);
-          user.save();
-        })
-        .then(() => res.redirect('/restaurants'));
-    })
+    .then(() => res.redirect('/restaurants'))
     .catch((err) => {
       if(err.name === 'ValidationError') return res.badRequest(`/restaurants/${req.params.id}/edit`, err.toString());
       next(err);
@@ -55,7 +46,7 @@ function editRoute(req, res, next) {
     .exec()
     .then((restaurant) => {
       if(!restaurant) return res.redirect();
-      if(!restaurant.belongsTo(req.user)) return res.unauthorized('You do not have permission to edit that resource');
+      if(!restaurant.belongsTo(req.loggedInUser)) return res.unauthorized('You do not have permission to edit that resource');
       return res.render('restaurants/edit', { restaurant });
     })
     .catch(next);
@@ -70,7 +61,7 @@ function updateRoute(req, res, next) {
       console.log('req params', req.params.id);
       console.log('This is the restaurant:', restaurant);
       if(!restaurant) return res.notFound();
-      if(!restaurant.belongsTo(req.user)) return res.unauthorized('You do not have permission to edit that resource');
+      if(!restaurant.belongsTo(req.loggedInUser)) return res.unauthorized('You do not have permission to edit that resource');
 
       for(const field in req.body) {
         restaurant[field] = req.body[field];
@@ -91,7 +82,7 @@ function deleteRoute(req, res, next) {
     .exec()
     .then((restaurant) => {
       if(!restaurant) return res.notFound();
-      if(!restaurant.belongsTo(req.user)) return res.unauthorized('You do not have permission to delete that resource');
+      if(!restaurant.belongsTo(req.loggedInUser)) return res.unauthorized('You do not have permission to delete that resource');
       return restaurant.remove();
     })
     .then(() => res.redirect('/restaurants'))
@@ -105,7 +96,7 @@ function createCommentRoute(req, res, next) {
     .then((restaurant) => {
       if (!restaurant) return res.notFound();
 
-      req.body.createdBy = req.user;
+      req.body.createdBy = req.loggedInUser;
       restaurant.comments.push(req.body);
 
       return restaurant.save();
@@ -117,27 +108,13 @@ function createCommentRoute(req, res, next) {
     });
 }
 
-// function deleteCommentRoute(req, res, next) {
-//   Restaurant
-//     .findById(req.params.id)
-//     .exec()
-//     .then((restaurant) => {
-//       if (!restaurant) return res.notFound();
-//       if (!restaurant.belongsTo(req.user)) return res.unauthorized('You do not have permission to delete that resource');
-//       restaurant.comments.id(req.params.comment._id).remove();
-//
-//       return restaurant.save();
-//     })
-//     .then(restaurant => res.redirect(`/restaurants/${restaurant.id}`))
-//     .catch(next);
-// }
+
 function deleteCommentRoute(req, res, next) {
   Restaurant
     .findById(req.params.id)
     .exec()
     .then((restaurant) => {
       if (!restaurant) return res.notFound();
-      if (!restaurant.belongsTo(req.user)) return res.unauthorized('You do not have permission to delete that resource');
 
       const comment = restaurant.comments.id(req.params.commentId);
       comment.remove();

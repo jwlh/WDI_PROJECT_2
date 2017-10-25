@@ -1,8 +1,11 @@
 
 <div class="container">
 
+<div class="row">
+  <div class="col">
 
-  <div class="col-8">
+  </div>
+  <div class="col-md-8 col-sm-10">
     <h2><%= restaurant.name %></h2>
     <div class="img-container-show">
       <img class = "img-fluid restaurant-img-show"src="<%= restaurant.image %>" alt="<%= restaurant.name %>"> <br>
@@ -35,10 +38,14 @@
       <p class = "review">
         <h4>Review:</h4>
         <%= restaurant.review %> <br>
-        <small>Written by: <%= restaurant.createdBy.username %></small>
+        <% if(locals.isAuthenticated) { %>
+          <small class="created-by">Added by:<a href="/profile/<%= restaurant.createdBy.id %>"> <%= restaurant.createdBy.username %></a></small>
+        <% } else { %>
+          <small class="created-by">Added by: <%= restaurant.createdBy.username %></small>
+        <% } %>
       </p>
 
-      <% if(locals.isAuthenticated && restaurant.belongsTo(user)) { %>
+      <% if(locals.isAuthenticated && restaurant.belongsTo(locals.loggedInUser)) { %>
 
         <a class = "btn btn-outline-secondary"href="/restaurants/<%= restaurant.id %>/edit" class="button">Edit restaurant</a>
 
@@ -58,7 +65,7 @@
               <small>left by: <%= comment.createdBy.username %></small>
             </p>
 
-              <% if(locals.isAuthenticated && comment.belongsTo(user)) { %>
+              <% if(locals.isAuthenticated && comment.belongsTo(loggedInUser)) { %>
 
                 <form class= "comment-delete" method="POST" action="/restaurants/<%= restaurant.id %>/comments/<%= comment.id %>">
                 <input type="hidden" name="_method" value="DELETE">
@@ -76,6 +83,12 @@
               <button class="btn btn-outline-success">Post your comment</button>
             </form>
         </section>
+      <% } else {%>
+        <h6> You have to be <a href="/login">logged in</a> to comment</h6>
       <% } %>
   </div>
+  <div class="col">
+
+  </div>
+</div>
 </div>

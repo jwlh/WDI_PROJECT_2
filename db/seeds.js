@@ -32,7 +32,7 @@ User
     firstName: 'Ralph',
     lastName: 'Hall',
     username: 'ralph',
-    email: 'louise@louise.com',
+    email: 'ralph@ralph.com',
     password: 'password',
     passwordConfirmation: 'password'
 

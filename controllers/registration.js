@@ -27,11 +27,10 @@ function registrationCreate(req,res) {
 function registrationShow(req, res, next) {
   User
     .findById(req.params.id)
-    .populate('restaurantsCreated')
     .exec()
     .then((user) => {
       Restaurant
-        .find()
+        .find({createdBy: req.params.id})
         .exec()
         .then(restaurants => {
           res.render('registrations/show', { user, restaurants });
@@ -42,16 +41,22 @@ function registrationShow(req, res, next) {
 }
 
 function registrationEdit(req, res) {
-  return res.render('registrations/edit');
+  User
+    .findById(req.params.id)
+    .exec()
+    .then((user) => {
+      res.render('registrations/edit', {user});
+    });
+
 }
 
 function registrationUpdate(req, res, next) {
   for(const field in req.body) {
-    req.user[field] = req.body[field];
+    req.loggedInUser[field] = req.body[field];
   }
 
-  req.user.save()
-    .then(() => res.redirect('/profile'))
+  req.loggedInUser.save()
+    .then(() => res.redirect(`/profile/${req.loggedInUser.id}`))
     .catch((err) => {
       if(err.name === 'ValidationError') return res.badRequest('/registrations/edit', err.toString());
       next(err);
@@ -59,7 +64,7 @@ function registrationUpdate(req, res, next) {
 }
 
 function registrationDelete(req, res, next) {
-  return req.user.remove()
+  return req.loggedInUser.remove()
     .then(() => {
       req.session.regenerate(() => res.redirect('/'));
     })

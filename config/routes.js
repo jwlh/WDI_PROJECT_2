@@ -17,7 +17,7 @@ router.route('/profile/:id')
   .put(registrations.update)
   .delete(registrations.delete);
 
-router.route('/profile/edit')
+router.route('/profile/:id/edit')
   .get(registrations.edit);
 
 router.route('/login')

@@ -1,55 +1,60 @@
 <div class="container">
+  <% if (`${user.id}` === `${locals.loggedInUser.id}`) { %>
+    <h2>Your Profile Details</h2>
 
-  <h2>Your Profile Details</h2>
+    <h5>Username: <%= user.username %></h5>
 
-  <h5>Username: <%= user.username %></h5>
-
-  <h5>First Name: <%= user.firstName %></h4>
+    <h5>First Name: <%= user.firstName %></h4>
     <h5>Last Name: <%= user.lastName %></h4>
 
-      <h5>Email: <%= user.email %></h5>
+    <h5>Email: <%= user.email %></h5>
 
-          <a class="btn btn-outline-secondary" href="/profile/edit">Edit your profile</a>
+    <a class="btn btn-outline-secondary" href="/profile/<%=user.id%>/edit">Edit your profile</a>
 
-          <form method="POST" action="/profile">
-            <input type="hidden" name="_method" value="DELETE">
-            <button class="btn btn-outline-danger">Delete your profile</button>
-          </form>
+    <form method="POST" action="/profile/<%=user.id%>">
+      <input type="hidden" name="_method" value="DELETE">
+      <button class="btn btn-outline-danger">Delete your profile</button>
+    </form>
+
+    <h3 class="restaurants-created">Restaurants you have added:</h3>
+
+  <%} else {%>
+
+    <h2 class="restaurants-created">Restaurants added by <%= user.username %>:</h2>
+
+  <% } %>
+
+  <div class="row">
+
+    <% restaurants.forEach(restaurant => { %>
+
+    <div class="col-lg-4 col-md-6 col-sm-9 restaurant-index">
+
+      <a href="/restaurants/<%= restaurant.id %>">
+        <div class="img-container-index">
+          <img class="img-fluid restaurant-img-index" src="<%= restaurant.image %>" alt="<%= restaurant.name %>">
+        </div>
+        <h4><%= restaurant.name %></h4>
+      </a>
+
+      <ul class="pizza-icon-ul">
+        <% while(restaurant.rating--) { %>
+          <li class="pizza-icon-li">
+            <img class= "pizza-icon-img-index" src='/images/pizza-icon.png'>
+          </li>
+        <% } %>
+      </ul>
+
+      <p>
+        <%= restaurant.address.line1 %><br>
+        <% if(restaurant.address.line2) { %><%= restaurant.address.line2 %><br><% } %>
+        <%= restaurant.address.city %><br>
+        <%= restaurant.address.postcode %><br>
+      </p>
 
 
+    </div>
+  <% }) %>
 
-        <h3 class="restaurants-created">Restaurants you have added:</h3>
-      <div class="row">
-
-        <% restaurants.forEach(restaurant => { %>
-          <% if (`${restaurant.createdBy}` === `${user.id}`) { %>
-            <div class="col-lg-4 col-md-6 col-sm-9 restaurant-index">
-
-            <a href="/restaurants/<%= restaurant.id %>">
-            <div class="img-container-index">
-            <img class="img-fluid restaurant-img-index" src="<%= restaurant.image %>" alt="<%= restaurant.name %>">
-            </div>
-            <h4><%= restaurant.name %></h4>
-            </a>
-            <ul class="pizza-icon-ul">
-            <% while(restaurant.rating--) { %>
-              <li class="pizza-icon-li">
-              <img class= "pizza-icon-img-index" src='/images/pizza-icon.png'>
-              </li>
-              <% } %>
-              </ul>
-
-            <p>
-            <%= restaurant.address.line1 %><br>
-            <% if(restaurant.address.line2) { %><%= restaurant.address.line2 %><br><% } %>
-            <%= restaurant.address.city %><br>
-            <%= restaurant.address.postcode %><br>
-            </p>
-
-
-              </div>
-              <% } %>
-              <% }) %>
-
-            </div>
-          </div>
+  </div>
+</div>
