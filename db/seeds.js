@@ -143,16 +143,16 @@ User
       }])
       .then((restaurants) => {
         console.log(`${restaurants.length} restaurants were created!`);
-        for (var i = 0; i < restaurants.length; i++) {
-          const createdId = restaurants[i].createdBy.id;
-          for (var j = 0; j < users.length; j++) {
-            if (users[j].id === createdId) {
-              users[j].restaurantsCreated.push(restaurants[i].id);
-              users[j].save();
-            }
-          }
-        }
-        console.log(users);
+        // for (var i = 0; i < restaurants.length; i++) {
+        //   const createdId = restaurants[i].createdBy.id;
+        // for (var j = 0; j < users.length; j++) {
+        //   if (users[j].id === createdId) {
+        //     users[j].restaurantsCreated.push(restaurants[i].id);
+        //     users[j].save();
+        // }
+        //   }
+        // }
+        // console.log(users);
       });
   })
   .catch((err) => console.log(err))
