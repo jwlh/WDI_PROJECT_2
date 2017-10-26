@@ -1,50 +1,63 @@
 <div class="container">
+  <div class="row">
 
-<form method="POST" action="/restaurants">
-  <div class="form-group">
-    <label for="name">Name</label>
-    <input type="text" name="name" id="name" required class="form-control">
-  </div>
-  <fieldset>
-    <legend>Address</legend>
-    <div class="form-group">
-      <label for="line1">Line 1</label>
-      <input type="text" name="address[line1]" id="line1" required class="form-control">
+    <div class="col">
     </div>
-    <div class="form-group">
-      <label for="line2">Line 2</label>
-      <input type="text" name="address[line2]" id="line2" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="city">City</label>
-      <input type="text" name="address[city]" id="city" required class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="postcode">Postcode</label>
-      <input type="text" name="address[postcode]" id="postcode" required class="form-control">
-    </div>
-  </fieldset>
-  <div class="form-group">
-    <label for="rating">Rating</label>
-    <select name="rating" id="rating" required class="form-control">
-        <option selected>Choose...</option>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
-  </div>
-  <div class="form-group">
-    <label for="review">Review</label>
-    <textarea type="text-box" name="review" id="review" required class="form-control" >Please add a review, recommend particular pizzas, give us a bit info on the vibe of the place etc.</textarea>
-  </div>
-  <div class="form-group">
-    <label for="image">Image</label>
-    <input type="text" name="image" id="image" required class="form-control">
-  </div>
 
-  <button class="btn btn-outline-success">Create restaurant</button>
-</form>
+    <div class="col-6">
 
+      <form method="POST" action="/restaurants">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" name="name" id="name" required class="form-control">
+        </div>
+        <fieldset>
+          <legend>Address</legend>
+          <div class="form-group">
+            <label for="line1">Line 1</label>
+            <input type="text" name="address[line1]" id="line1" required class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="line2">Line 2</label>
+            <input type="text" name="address[line2]" id="line2" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" name="address[city]" id="city" required class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="postcode">Postcode</label>
+            <input type="text" name="address[postcode]" id="postcode" required class="form-control">
+          </div>
+        </fieldset>
+        <div class="form-group">
+          <label for="rating">Rating</label>
+          <select name="rating" id="rating" required class="form-control">
+            <option selected>Choose...</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="review">Review</label>
+          <textarea type="text-box" name="review" id="review" required class="form-control" >Please add a review, recommend particular pizzas, give us a bit info on the vibe of the place etc.</textarea>
+        </div>
+        <div class="form-group">
+          <label for="image">Image</label>
+          <input type="text" name="image" id="image" required class="form-control">
+        </div>
+
+        <button class="btn btn-outline-success">Create restaurant</button>
+      </form>
+
+    </div>
+    <div class="col">
+    </div>
+  </div>
+  <div class="row bottom">
+
+  </div>
 </div>
