@@ -1,12 +1,12 @@
 ![image](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png)
 
-# GA WDI30 Project 2 - EAT BETTER PIZZA
+# GA WDI 30 PROJECT 2 - EAT BETTER PIZZA
 
-For our second project on the Web Development Imersive cours we were tasked to build a full-stack RESTful application that included authentication.
+For our second project on the Web Development Imersive course we were tasked to build a full-stack RESTful application that included authentication.
 
 As a food fanatic I'm always hunting for new resaturants to try and as everyone's favourite food is pizza I thought I would create a site to guide people around the best (and worst) pizza places in town.
 
-#####[Visit Website -Need URL](URL) 
+Link to app:  [https://eat-better-pizza.herokuapp.com/](https://eat-better-pizza.herokuapp.com/) 
 
 <img src="https://i.imgur.com/RLRBHSL.jpg" width="400">
 
@@ -39,10 +39,28 @@ Eat Better Pizza is a full-stack RESTful app allowing people to sign up, create 
 
 
 ---
+### Technologies used:
 
-This project was 5 days long, i really enjoyed building something that felt like a 'whole' site. Overall i am extremely happy with what i was able to create in that time.
+* HTML
+* JWT
+* Bluebird
+* NodeJS
+* ExpressJS
+* Express-jws
+* Mongoose
+* SCSS
+* EJS
+* Bootstrap
+
+### Learnings:
+
+This project was 5 days long, I really enjoyed building something that felt like a 'whole' site. Overall I am extremely happy with what I was able to create in that time.
+
+This was the first time we had built a Full-Stack App from scratch.  I certainly learnt a lot about the importance of planning before coding and using tools such as a trello board to keep on track.
 
 #### Additional features i would like to add in the future would be:
 
-- add a google maps API so that i could show the map of the restaurant within my site instead of directing people away
-- increase the amount of reviews, perhaps by pulling in reviews from elsewhere
+- Add a google maps API so that I could show the map of the restaurant within my site instead of directing people away.
+- Increase the amount of reviews, perhaps by pulling in reviews from elsewhere using a suitable API for instance.
+- I would like to add the ability for others to vote on a rating for each restaurant, not just the writer of the review and to display the average rating as well as the main reviewers.
+
