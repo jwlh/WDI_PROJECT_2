@@ -1,6 +1,6 @@
 ![](https://www.coindesk.com/wp-content/themes/coindesk2/images/events/consensus-2015/sponsors-and-partners/general-assembly.png)
 
-# GA WDI 30 PROJECT 2 - EAT BETTER PIZZA
+# WDI 30, PROJECT 2 - EAT BETTER PIZZA
 
 For our second project on the Web Development Imersive course we were tasked to build a full-stack RESTful application that included authentication.
 
