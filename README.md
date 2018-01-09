@@ -10,7 +10,7 @@ Link to app:  [https://eat-better-pizza.herokuapp.com/](https://eat-better-pizza
 
 <img src="https://i.imgur.com/RLRBHSL.jpg" width="400">
 
-Eat Better Pizza is a full-stack RESTful app allowing people to sign up, create restaurants and comment on existing ones.
+Eat Better Pizza is a full-stack RESTful app allowing users to sign up, create restaurant reviews and comment on existing ones, all to make sure they are eating the best pizza possible!
 
 ---
 
